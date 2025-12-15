@@ -12,6 +12,19 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(main src/main.cpp src/Complex.hpp)
+add_executable(main
+src/main.cpp
+src/util/Complex.hpp
+src/fractal/IFractal.h
+src/renderer/IFractalRenderer.h
+src/renderer/FractalRenderer.h
+src/renderer/FractalRenderer.cpp
+src/renderer/IRenderer.h
+src/fractal/MandelbrotSet.h
+src/fractal/MandelbrotSet.cpp
+src/buffer/BufferedImage.h
+src/buffer/IBufferedImage.h
+src/buffer/ImageBuffer.cpp
+)
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)

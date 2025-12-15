@@ -12,10 +12,14 @@ public:
     void set_x(const T& x);
     void set_y(const T& y);
 
+    Complex<T> square() const;
+
+    // Returns copy of a temporary
     Complex<T> operator+(const Complex<T>& other) const;
     Complex<T> operator-(const Complex<T>& other) const;
-
+    Complex<T> operator*(const Complex<T>& other) const;
 private:
+    // (const) T& would require callers object to outlive
     T x;
     T y;
 };
@@ -57,6 +61,14 @@ void Complex<T>::set_y(const T& y) {
 }
 
 template<typename T>
+Complex<T> Complex<T>::square() const {
+    Complex<T> squared;
+    squared.set_x(this->x * this->x - this->y * this->y);
+    squared.set_y(2 * this->x * this->y);
+    return squared;
+}
+
+template<typename T>
 Complex<T> Complex<T>::operator+(const Complex<T>& other) const {
     T newX = this->get_x() + other.get_x();
     T newY = this->get_y() + other.get_y();
@@ -67,5 +79,13 @@ template<typename T>
 Complex<T> Complex<T>::operator-(const Complex<T>& other) const {
     T newX = this->get_x() - other.get_x();
     T newY = this->get_y() - other.get_y();
+    return Complex<T>(newX, newY);
+}
+
+template<typename T>
+Complex<T> Complex<T>::operator*(const Complex<T>& other) const {
+    T newX = this->get_x() * other.get_x() - this->get_y() - other.get_y();
+    T newY = this->get_y() * other.get_x() + this->get_x() * other.get_y();
+
     return Complex<T>(newX, newY);
 }
