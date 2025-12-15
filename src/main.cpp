@@ -42,7 +42,7 @@ int main() {
     for (size_t i = 0; i < width * height; ++i) {
         uint8_t gray = buffer[i];
         if (gray > nonZeroCount) nonZeroCount++;
-        uint8_t color = (gray == 11) ? 0 : 255;  // WHITE if not in set, BLACK if in set
+        uint8_t color = (gray == 21) ? 0 : 255;  // WHITE if not in set, BLACK if in set
         pixels[i * 4 + 0] = color;  // R
         pixels[i * 4 + 1] = color;  // G
         pixels[i * 4 + 2] = color;  // B

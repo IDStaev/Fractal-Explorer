@@ -26,8 +26,8 @@ void FractalRenderer::render() {
                 * (this->fractal->get_max_y() - this->fractal->get_min_y()) // [min, max)
                 + this->fractal->get_min_y()); // offset
 
-            uint8_t val = this->fractal->compute_at_point(point, 10); // TODO: not constant
-            this->image->set_pixel(j, i, val == 10 ? 0 : val);
+            uint8_t val = this->fractal->compute_at_point(point, 20); // TODO: not constant
+            this->image->set_pixel(j, i, val == 20 ? 0 : val);
         }
     }
 }
