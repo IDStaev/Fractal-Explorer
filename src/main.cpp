@@ -5,7 +5,7 @@
 #include "buffer/BufferedImage.h"
 
 int main() {
-    int depth = 20;
+    int depth = 13;
 
     auto fr = std::make_unique<FractalRenderer>(
         std::make_unique<MandelbrotSet>(),

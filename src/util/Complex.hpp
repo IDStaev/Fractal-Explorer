@@ -84,7 +84,7 @@ Complex<T> Complex<T>::operator-(const Complex<T>& other) const {
 
 template<typename T>
 Complex<T> Complex<T>::operator*(const Complex<T>& other) const {
-    T newX = this->get_x() * other.get_x() - this->get_y() - other.get_y();
+    T newX = this->get_x() * other.get_x() - this->get_y() * other.get_y();
     T newY = this->get_y() * other.get_x() + this->get_x() * other.get_y();
 
     return Complex<T>(newX, newY);
