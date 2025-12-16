@@ -25,6 +25,8 @@ src/fractal/MandelbrotSet.cpp
 src/buffer/BufferedImage.h
 src/buffer/IBufferedImage.h
 src/buffer/ImageBuffer.cpp
+        src/pixel/Pixel.cpp
+        src/pixel/Pixel.h
 )
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)

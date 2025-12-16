@@ -6,7 +6,7 @@ BufferedImage::BufferedImage(size_t width, size_t height) {
     this->width = width;
     this->height = height;
 
-    this->buffer = new uint8_t[width * height];
+    this->buffer = new uint8_t[width * height * 4]{};
 }
 
 BufferedImage::~BufferedImage() {
@@ -30,7 +30,11 @@ void BufferedImage::set_pixel(size_t x, size_t y, uint8_t value) {
         throw std::out_of_range("Coordinates are out of bound.");
     }
 
+    // TODO: ??????? Abstract away
     this->buffer[to_image_coord(x, y)] = value;
+    this->buffer[to_image_coord(x, y) + 1] = value;
+    this->buffer[to_image_coord(x, y) + 2] = value;
+    this->buffer[to_image_coord(x, y) + 3] = value;
 }
 
 uint8_t BufferedImage::get_pixel(size_t x, size_t y) const {
@@ -46,5 +50,5 @@ bool BufferedImage::is_in_bound(size_t x, size_t y) const {
 }
 
 long long BufferedImage::to_image_coord(size_t x, size_t y) const {
-    return y * this->width + x;
+    return (y * this->width + x) * 4;
 }

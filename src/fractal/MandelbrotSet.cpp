@@ -26,10 +26,10 @@ uint8_t MandelbrotSet::compute_at_point(const Complex<double>& c, uint8_t depth)
 {
     // Escape time unoptimized algorithm
 
-    Complex<double> z;
+    Complex<double> z = c;
     uint8_t iterations = 0;
 
-    while (iterations <= depth && this->is_in_bounds(z)) {
+    while (iterations < depth && this->is_in_bounds(z)) {
         z = z.square() + c;
         iterations++;
     }

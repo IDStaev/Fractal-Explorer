@@ -3,7 +3,7 @@
 
 class FractalRenderer : public IFractalRenderer {
 public:
-    FractalRenderer(std::unique_ptr<IFractal> fractal, std::unique_ptr<IBufferedImage> image);
+    FractalRenderer(std::unique_ptr<IFractal> fractal, std::unique_ptr<IBufferedImage> image, size_t depth = 13);
 
     // Let callers observe while retaining ownership
     const IFractal* get_fractal() const override;
@@ -13,4 +13,5 @@ public:
 private:
     std::unique_ptr<const IFractal> fractal;
     std::unique_ptr<IBufferedImage> image;
+    size_t depth;
 };
