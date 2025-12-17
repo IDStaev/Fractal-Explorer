@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include "../pixel/Pixel.h"
 
 class IBufferedImage {
 public:
@@ -10,6 +11,6 @@ public:
     virtual size_t get_height() const = 0;
     virtual const uint8_t* get_buffer() const = 0;
 
-    virtual void set_pixel(size_t x, size_t y, uint8_t value) = 0;
-    virtual uint8_t get_pixel(size_t x, size_t y) const = 0;
+    virtual void set_pixel(size_t x, size_t y, const Pixel& pixel) = 0;
+    virtual Pixel get_pixel(size_t x, size_t y) const = 0;
 };

@@ -1,15 +1,17 @@
 #include "FractalRenderer.h"
 
 FractalRenderer::FractalRenderer(std::unique_ptr<IFractal> fractal,
-    std::unique_ptr<IBufferedImage> image, size_t depth)
-    : fractal(std::move(fractal)), image(std::move(image)), depth(depth) {
+                                 std::unique_ptr<IBufferedImage> image,
+                                 std::unique_ptr<IColorStrategy> color_strategy, size_t depth)
+    : fractal(std::move(fractal)), image(std::move(image)),
+      color_strategy(std::move(color_strategy)), depth(depth) {
 }
 
-const IFractal* FractalRenderer::get_fractal() const {
+const IFractal *FractalRenderer::get_fractal() const {
     return this->fractal.get();
 }
 
-const IBufferedImage* FractalRenderer::get_image() const {
+const IBufferedImage *FractalRenderer::get_image() const {
     return this->image.get();
 }
 
@@ -21,16 +23,16 @@ void FractalRenderer::render() {
         for (size_t j = 0; j < width; j++) {
             Complex<double> point;
 
-            point.set_x((double)j / width // [0, 1)
-                * (this->fractal->get_max_x() - this->fractal->get_min_x()) // [min, max)
-                + this->fractal->get_min_x()); // offset
-            point.set_y((double)i / height // [0, 1)
-                * (this->fractal->get_max_y() - this->fractal->get_min_y()) // [min, max)
-                + this->fractal->get_min_y()); // offset
+            point.set_x((double) j / width // [0, 1)
+                        * (this->fractal->get_max_x() - this->fractal->get_min_x()) // [min, max)
+                        + this->fractal->get_min_x()); // offset
+            point.set_y((double) i / height // [0, 1)
+                        * (this->fractal->get_max_y() - this->fractal->get_min_y()) // [min, max)
+                        + this->fractal->get_min_y()); // offset
 
             uint8_t val = this->fractal->compute_at_point(point, this->depth);
-            val = (uint8_t)((double)val/depth*255);
-            this->image->set_pixel(j, i, val);
+            Pixel pixel = this->color_strategy->get_color(val, depth);
+            this->image->set_pixel(j, i, pixel);
         }
     }
 }

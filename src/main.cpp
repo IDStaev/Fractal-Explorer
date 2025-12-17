@@ -3,6 +3,12 @@
 #include "renderer/FractalRenderer.h"
 #include "fractal/MandelbrotSet.h"
 #include "buffer/BufferedImage.h"
+#include "color/BWColorStrategy.h"
+#include "color/GrayscaleColorStrategy.h"
+
+// TODO: Isolate Presentation/SFML logic
+// TODO: Command line args for image size, depth, fractal type, output file
+// TODO: Zooming and panning functionality
 
 int main() {
     int depth = 13;
@@ -10,6 +16,8 @@ int main() {
     auto fr = std::make_unique<FractalRenderer>(
         std::make_unique<MandelbrotSet>(),
         std::make_unique<BufferedImage>(800, 600),
+        //std::make_unique<BWColorStrategy>(),
+        std::make_unique<GrayscaleColorStrategy>(),
         depth
     );
 

@@ -13,20 +13,26 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 add_executable(main
-src/main.cpp
-src/util/Complex.hpp
-src/fractal/IFractal.h
-src/renderer/IFractalRenderer.h
-src/renderer/FractalRenderer.h
-src/renderer/FractalRenderer.cpp
-src/renderer/IRenderer.h
-src/fractal/MandelbrotSet.h
-src/fractal/MandelbrotSet.cpp
-src/buffer/BufferedImage.h
-src/buffer/IBufferedImage.h
-src/buffer/ImageBuffer.cpp
+        src/main.cpp
+        src/util/Complex.hpp
+        src/fractal/IFractal.h
+        src/renderer/IFractalRenderer.h
+        src/renderer/FractalRenderer.h
+        src/renderer/FractalRenderer.cpp
+        src/renderer/IRenderer.h
+        src/fractal/MandelbrotSet.h
+        src/fractal/MandelbrotSet.cpp
+        src/buffer/BufferedImage.h
+        src/buffer/IBufferedImage.h
+        src/buffer/BufferedImage.cpp
         src/pixel/Pixel.cpp
         src/pixel/Pixel.h
+        src/color/IColorStrategy.h
+        src/color/IColorStrategy.h
+        src/color/BWColorStrategy.cpp
+        src/color/BWColorStrategy.h
+        src/color/GrayscaleColorStrategy.cpp
+        src/color/GrayscaleColorStrategy.h
 )
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)
