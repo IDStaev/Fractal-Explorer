@@ -35,6 +35,11 @@ add_executable(main
         src/color/GrayscaleColorStrategy.h
         src/color/RainbowColorStrategy.cpp
         src/color/RainbowColorStrategy.h
+        src/renderer/GridRenderer.cpp
+        src/renderer/GridRenderer.h
+        src/renderer/GridRenderer.h
+        src/view/FractalView.cpp
+        src/view/FractalView.h
 )
 target_compile_features(main PRIVATE cxx_std_17)
 target_link_libraries(main PRIVATE SFML::Graphics)

@@ -6,20 +6,28 @@
 #include "color/BWColorStrategy.h"
 #include "color/GrayscaleColorStrategy.h"
 #include "color/RainbowColorStrategy.h"
+#include "renderer/GridRenderer.h"
 
 // TODO: Isolate Presentation/SFML logic
 // TODO: Command line args for image size, depth, fractal type, output file
-// TODO: Zooming and panning functionality
+// TODO: Zooming and panning functionality !!!!! (view class?)
 // TODO: Window size independence
+// TODO: Real and imaginary axis (class)
 
 int main() {
-    int depth = 20;
+    int depth = 50;
+    std::shared_ptr<IBufferedImage> canvas = std::make_shared<BufferedImage>(900, 600);
+    std::unique_ptr<FractalView> fv = std::make_unique<FractalView>(std::make_unique<MandelbrotSet>());
+    fv->set_max_x(1.0);
+    fv->set_min_x(0);
+    fv->set_max_y(1.0);
+    fv->set_min_y(0);
 
     auto fr = std::make_unique<FractalRenderer>(
-        std::make_unique<MandelbrotSet>(),
-        std::make_unique<BufferedImage>(800, 600),
+        std::move(fv),
+        canvas,
         //std::make_unique<BWColorStrategy>(),
-        std::make_unique<RainbowColorStrategy>(),
+        std::make_unique<GrayscaleColorStrategy>(),
         depth
     );
 
@@ -27,7 +35,9 @@ int main() {
     fr->render();
     std::cout << "Render complete" << std::endl;
 
-    const IBufferedImage* image = fr->get_image();
+    auto gr = std::make_unique<GridRenderer>(canvas, 450, 300);
+
+    const IBufferedImage* image = gr->get_image();
     unsigned width = image->get_width();
     unsigned height = image->get_height();
     std::cout << "Image size: " << width << "x" << height << std::endl;
@@ -49,7 +59,7 @@ int main() {
     texture.update(buffer);
     sf::Sprite sprite(texture);
 
-    auto window = sf::RenderWindow(sf::VideoMode({ width, height }), "FractalStudio");
+    auto window = sf::RenderWindow(sf::VideoMode({ width, height }), "FractalExplorer");
     window.setFramerateLimit(144);
     while (window.isOpen())
     {
